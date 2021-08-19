@@ -1,3 +1,7 @@
+env:
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
+  docker_password: ${{ secrets.DOCKER_PASSWORD }}
+  
 name: CI
 
 on:
@@ -7,21 +11,40 @@ on:
     branches: [ main ]
 
 jobs:
-
-  build:
+ 
+  Docker-build-and-push-backend:
     runs-on: ubuntu-latest
-    container: golang:1.17
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: build backend
+        run: |
+          cd backend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-build-backend.sh
+          bash docker-build-backend.sh
+      - name: upload backend
+        run: |
+          cd backend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-push-backend.sh
+          bash docker-push-backend.sh
 
-    - name: Build backend
-      run: |
-        cd backend
-        go build -v
-    - name: Build frontend
-      run: |
-        cd frontend
-        go build -v
+  Docker-build-and-push-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: build frontend
+        run: |
+          cd frontend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-build-frontend.sh
+          bash docker-build-frontend.sh
+      - name: upload frontend
+        run: |
+          cd frontend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-push-frontend.sh
+          bash docker-push-frontend.sh
 
   lint-test:
     runs-on: ubuntu-latest
@@ -41,6 +64,7 @@ jobs:
         go test -v
         
   life-check:
+    needs: [Docker-build-and-push-backend, Docker-build-and-push-frontend]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
