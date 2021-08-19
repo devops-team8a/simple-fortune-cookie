@@ -43,6 +43,18 @@ jobs:
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x docker-push-backend.sh
           bash docker-push-backend.sh
+      - name: build frontend
+        run: |
+          cd frontend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-build-frontend.sh
+          bash docker-build-frontend.sh
+      - name: upload frontend
+        run: |
+          cd frontend
+          export GIT_COMMIT="GA-$GITHUB_SHA"
+          chmod +x docker-push-frontend.sh
+          bash docker-push-frontend.sh
 
   lint-test:
     runs-on: ubuntu-latest
