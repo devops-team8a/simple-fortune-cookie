@@ -44,9 +44,6 @@ jobs:
           chmod +x docker-push.backend.sh
           docker-push.backend.sh
 
-
-
-
   lint-test:
     runs-on: ubuntu-latest
     container: golang:1.17
