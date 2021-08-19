@@ -11,22 +11,7 @@ on:
     branches: [ main ]
 
 jobs:
-
-  build:
-    runs-on: ubuntu-latest
-    container: golang:1.17
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Build backend
-      run: |
-        cd backend
-        go build -v
-    - name: Build frontend
-      run: |
-        cd frontend
-        go build -v
-  
+ 
   Docker-build-and-push:
     runs-on: ubuntu-latest
     steps:
@@ -74,6 +59,7 @@ jobs:
         go test -v
         
   life-check:
+    needs: Docker-build-and-push
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
