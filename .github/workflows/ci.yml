@@ -36,13 +36,13 @@ jobs:
           cd backend
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x docker-build-backend.sh
-          sh docker-build-backend.sh
+          bash docker-build-backend.sh
       - name: upload backend
         run: |
           cd backend
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x docker-push-backend.sh
-          sh docker-push-backend.sh
+          bash docker-push-backend.sh
 
   lint-test:
     runs-on: ubuntu-latest
