@@ -8,3 +8,7 @@ services:
             - BACKEND_DNS=backend
     backend: 
         image: robinlp1/cookie-backend:latest
+        environment:
+            - REDIS_DNS=redis
+    redis:
+        image: redis:latest
