@@ -12,7 +12,7 @@ on:
 
 jobs:
  
-  Docker-build-and-push:
+  Docker-build-and-push-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,6 +28,11 @@ jobs:
           export GIT_COMMIT="GA-$GITHUB_SHA"
           chmod +x docker-push-backend.sh
           bash docker-push-backend.sh
+
+  Docker-build-and-push-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: build frontend
         run: |
           cd frontend
@@ -59,7 +64,7 @@ jobs:
         go test -v
         
   life-check:
-    needs: Docker-build-and-push
+    needs: [Docker-build-and-push-backend, Docker-build-and-push-frontend]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
