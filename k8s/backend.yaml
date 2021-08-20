@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: c-backend
+  name: c-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: c-backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: c-backend
+    spec:
+      containers:
+      - image: robinlp1/cookie-backend:latest
+        name: cookie-backend
+        ports:
+        - containerPort: 9000
+        env:
+        - name: REDIS_DNS
+          value: c-redis
+        resources: {}
+status: {}
