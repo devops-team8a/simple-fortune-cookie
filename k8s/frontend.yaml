@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: c-frontend
+  name: c-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: c-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: c-frontend
+    spec:
+      containers:
+      - image: robinlp1/cookie-frontend:latest
+        name: cookie-frontend
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BACKEND_DNS
+          value: c-backend
+        resources: {}
+status: {}

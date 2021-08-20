@@ -11,3 +11,9 @@ services:
         image: robinlp1/cookie-backend:${BUILD_TAG}
         environment:
             - "BUILD_TAG=${BUILD_TAG}"
+    backend: 
+        image: robinlp1/cookie-backend:latest
+        environment:
+            - REDIS_DNS=redis
+    redis:
+        image: redis:latest
