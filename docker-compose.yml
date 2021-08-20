@@ -11,9 +11,6 @@ services:
         image: robinlp1/cookie-backend:${GIT_COMMIT}
         environment:
             - "GIT_COMMIT=${GIT_COMMIT}"
-    backend: 
-        image: robinlp1/cookie-backend:latest
-        environment:
             - REDIS_DNS=redis
     redis:
         image: redis:latest
