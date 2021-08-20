@@ -18,7 +18,7 @@ spec:
         app: c-frontend
     spec:
       containers:
-      - image: robinlp1/cookie-frontend:latest
+      - image: robinlp1/cookie-frontend:1.0-${GIT_COMMIT}
         name: cookie-frontend
         ports:
         - containerPort: 8080
