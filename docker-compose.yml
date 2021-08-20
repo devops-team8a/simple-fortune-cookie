@@ -1,16 +1,16 @@
 version: "3.4"
 services:
     frontend:
-        image: robinlp1/cookie-frontend:${BUILD_TAG}
+        image: robinlp1/cookie-frontend:${GIT_COMMIT}
         ports:
             - 8080:8080    
         environment:
             - BACKEND_DNS=backend
-            - "BUILD_TAG=${BUILD_TAG}"
+            - "GIT_COMMIT=${GIT_COMMIT}"
     backend: 
-        image: robinlp1/cookie-backend:${BUILD_TAG}
+        image: robinlp1/cookie-backend:${GIT_COMMIT}
         environment:
-            - "BUILD_TAG=${BUILD_TAG}"
+            - "GIT_COMMIT=${GIT_COMMIT}"
     backend: 
         image: robinlp1/cookie-backend:latest
         environment:
