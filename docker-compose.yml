@@ -1,14 +1,14 @@
 version: "3.4"
 services:
     frontend:
-        image: robinlp1/cookie-frontend:${GIT_COMMIT}
+        image: robinlp1/cookie-frontend:1.0-${GIT_COMMIT::4}
         ports:
             - 8080:8080    
         environment:
             - BACKEND_DNS=backend
             - "GIT_COMMIT=${GIT_COMMIT}"
     backend: 
-        image: robinlp1/cookie-backend:${GIT_COMMIT}
+        image: robinlp1/cookie-backend:1.0-${GIT_COMMIT::4}
         environment:
             - "GIT_COMMIT=${GIT_COMMIT}"
             - REDIS_DNS=redis
