@@ -67,7 +67,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: run docker-compose
       run: |
-        BUILD_TAG=latest docker-compose up -d
+        export BUILD_TAG="GA-$GITHUB_SHA"
+        docker-compose up -d
         sleep 5
     - name: test availability
       run: bash test.sh
