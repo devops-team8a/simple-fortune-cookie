@@ -86,11 +86,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: run docker-compose
-    - run: |
+      run: |
         export GIT_COMMIT="GA-${GITHUB_SHA::4}"
         run docker-compose
         curl localhost:8080
         sleep 5
     - name: run siege
-    - name: |
+      run : |
         siege localhost:8080
