@@ -14,7 +14,6 @@ jobs:
     container: golang:1.17
     steps:
     - uses: actions/checkout@v2
-
     - name: lint
       run: |
         curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.0
@@ -27,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     container: golang:1.17
     steps:
+    - uses: actions/checkout@v2
     - name: Test
       run: |
         cd frontend
