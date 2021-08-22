@@ -79,3 +79,16 @@ jobs:
     - name: test availability
       run: bash test.sh
 
+  check-siege:
+    runs-on: ubuntu-latest
+    container: rufus/siege-engine:latest
+    needs: [Docker-build-and-push-backend, Docker-build-and-push-frontend]
+    steps:
+    - uses: actions/checkout@v2
+    - name: |
+        export GIT_COMMIT="GA-${GITHUB_SHA::4}"
+        run docker-compose
+        curl localhost:8080
+        sleep 5
+    - name: |
+        siege localhost:8080
