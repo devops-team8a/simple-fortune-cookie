@@ -3,6 +3,8 @@ name: CD
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   deploy-dev:
@@ -20,3 +22,20 @@ jobs:
       - name: run k8s
         run: |
           kubectl apply -f k8s/
+
+  check-siege:
+    runs-on: ubuntu-latest
+    container: rufus/siege-engine:latest
+    needs: [deploy-prod]
+    steps:
+    - uses: actions/checkout@v2
+    - name: wait
+      run: |
+        sleep 5
+# fetch first ip
+# kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'        
+# fetch port
+# kubectl get service c-frontend -o jsonpath='{.spec.ports[].nodePort}'
+    - name: run siege
+      run : |
+        siege http://34.79.255.98:31582/
