@@ -31,6 +31,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: wait
       run: |
+        siege.config
         cat ~/.siegerc
         sleep 5
 # fetch first ip
