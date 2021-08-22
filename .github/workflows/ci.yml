@@ -78,4 +78,3 @@ jobs:
         sleep 5
     - name: test availability
       run: bash test.sh
-
